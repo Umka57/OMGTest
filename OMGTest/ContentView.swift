@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 
 struct Row: Hashable, Equatable {
     
@@ -32,9 +33,17 @@ class DataStore: ObservableObject {
     
     @Published var data: [Row] = []
     
+    private var timer: AnyCancellable?
+    
     init() {
+        
         generateData()
-        startUpdatingData()
+        
+        timer = Timer.publish(every: 1, on: .main, in: .common)
+                    .autoconnect()
+                    .sink { [weak self] _ in
+                        self?.updateRandomElement()
+                    }
     }
     
     func generateData() {
@@ -48,16 +57,7 @@ class DataStore: ObservableObject {
         }
     }
     
-    func startUpdatingData() {
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            DispatchQueue.main.async {
-                self.updateRandomElement()
-            }
-        }
-    }
-    
     func updateRandomElement() {
-        guard !data.isEmpty else { return }
         data.forEach({ row in
             let randomIndex = Int.random(in: 0..<row.elements.count)
             data[row.id].elements[randomIndex].value = Int.random(in: 1...100)
