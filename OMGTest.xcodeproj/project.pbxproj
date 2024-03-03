@@ -11,6 +11,8 @@
 		878202712B90CA090074C702 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878202702B90CA090074C702 /* ContentView.swift */; };
 		878202732B90CA0A0074C702 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 878202722B90CA0A0074C702 /* Assets.xcassets */; };
 		878202762B90CA0A0074C702 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 878202752B90CA0A0074C702 /* Preview Assets.xcassets */; };
+		8782027D2B94E7DE0074C702 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8782027C2B94E7DE0074C702 /* DataModel.swift */; };
+		8782027F2B94E8070074C702 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8782027E2B94E8070074C702 /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,8 @@
 		878202702B90CA090074C702 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		878202722B90CA0A0074C702 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		878202752B90CA0A0074C702 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8782027C2B94E7DE0074C702 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		8782027E2B94E8070074C702 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +59,8 @@
 				878202702B90CA090074C702 /* ContentView.swift */,
 				878202722B90CA0A0074C702 /* Assets.xcassets */,
 				878202742B90CA0A0074C702 /* Preview Content */,
+				8782027C2B94E7DE0074C702 /* DataModel.swift */,
+				8782027E2B94E8070074C702 /* ViewModel.swift */,
 			);
 			path = OMGTest;
 			sourceTree = "<group>";
@@ -139,6 +145,8 @@
 			files = (
 				878202712B90CA090074C702 /* ContentView.swift in Sources */,
 				8782026F2B90CA090074C702 /* OMGTestApp.swift in Sources */,
+				8782027F2B94E8070074C702 /* ViewModel.swift in Sources */,
+				8782027D2B94E7DE0074C702 /* DataModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,79 +1,13 @@
 import SwiftUI
-import Combine
-
-struct Row: Hashable, Equatable {
-    
-    var id: Int
-    var elements: [Element]
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-    
-    static func == (lhs: Row, rhs: Row) -> Bool {
-        lhs.id == rhs.id
-    }
-}
-
-struct Element: Hashable, Equatable {
-    
-    var id: Int
-    var value: Int
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-    
-    static func == (lhs: Element, rhs: Element) -> Bool {
-        lhs.id == rhs.id
-    }
-}
-
-class DataStore: ObservableObject {
-    
-    @Published var data: [Row] = []
-    
-    private var timer: AnyCancellable?
-    
-    init() {
-        
-        generateData()
-        
-        timer = Timer.publish(every: 1, on: .main, in: .common)
-                    .autoconnect()
-                    .sink { [weak self] _ in
-                        self?.updateRandomElement()
-                    }
-    }
-    
-    func generateData() {
-        for i in 0...150 {
-            var elements: [Element] = []
-            for j in 0...20 {
-                let newElement = Element(id: j, value: Int.random(in: 1...100))
-                elements.append(newElement)
-            }
-            data.append(Row(id: i, elements: elements))
-        }
-    }
-    
-    func updateRandomElement() {
-        data.forEach({ row in
-            let randomIndex = Int.random(in: 0..<row.elements.count)
-            data[row.id].elements[randomIndex].value = Int.random(in: 1...100)
-        })
-    }
-}
-
 
 struct ContentView: View {
     
-    @StateObject var dataStore = DataStore()
+    @StateObject var vm = ViewModel()
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             LazyVStack {
-                ForEach(dataStore.data, id: \.self) { row in
+                ForEach(vm.data, id: \.self) { row in
                     VStack(spacing: 10){
                         
                         Text("\(row.id + 1)")
@@ -84,15 +18,21 @@ struct ContentView: View {
                             
                             LazyHStack(spacing: 10) {
                                 
-                                ForEach(dataStore.data[row.id].elements, id: \.self) { item in
+                                ForEach(vm.data[row.id].elements, id: \.self) { item in
                                     Cell(item: item)
                                 }
+                                
                             }
-                            .padding(.vertical, 8)
+                            .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
                         }
-                        .padding(.horizontal, 8)
                     }
                     .id(row.id)
+                    .onAppear {
+                        vm.generateRow(rowIndex: row.id)
+                    }
+                    .onDisappear {
+                        vm.rowIsInvisible(rowId: row.id)
+                    }
                 }
             }
         }
